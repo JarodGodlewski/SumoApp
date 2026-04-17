@@ -7,10 +7,15 @@
 - Prioritize **clean, maintainable, and well-typed** code.
 - Use existing patterns: NativeWind, Reanimated, glassmorphism, component-driven architecture.
 
+## Git Workflow (IMPORTANT)
+- After completing any significant task or phase, **always commit and push** the changes.
+- Use clear, conventional commit messages.
+- Never leave uncommitted changes after finishing work.
+
 ## Project Context
 - This is a universal Expo React Native + Supabase + NativeWind fantasy sumo app called "Chibi Sumo Stable".
 - Key screens: `app/index.tsx` (Stable), `app/draft.tsx` (Draft), `app/rumble.tsx`, `app/live.tsx`.
-- Use real data from `useRikishiList()` (from `src/lib/sumoApi.ts`) whenever possible.
+- Use real data from `useRikishiList()` whenever possible.
 - Centralized types live in `types/`.
 - Custom hooks live in `hooks/`.
 
@@ -19,8 +24,3 @@
 - Only edit files that already exist unless explicitly told to create new ones.
 - Keep changes minimal and focused.
 - After making changes, verify that everything still compiles cleanly.
-
-## Communication Style
-- Be direct and concise.
-- Always summarize what was done after completing a task.
-- If something is unclear, ask before acting.

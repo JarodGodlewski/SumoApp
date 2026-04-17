@@ -10,8 +10,8 @@ interface TierTabsProps {
 
 export function TierTabs({ tiers, currentTier, onChange }: TierTabsProps) {
   return (
-    <View className="px-6 pt-4 pb-6 bg-white border-b border-[#ffe4d1]">
-      <View className="flex-row bg-[#fff1e6] rounded-3xl p-1">
+    <View className="px-6 pt-4 pb-6 bg-white dark:bg-gray-800 border-b border-[#ffe4d1] dark:border-gray-600">
+      <View className="flex-row bg-[#fff1e6] dark:bg-gray-700 rounded-3xl p-1">
         {tiers.map((tier) => (
           <TouchableOpacity
             key={tier}
@@ -22,7 +22,7 @@ export function TierTabs({ tiers, currentTier, onChange }: TierTabsProps) {
           >
             <Text
               className={`font-medium text-sm tracking-wide ${
-                currentTier === tier ? 'text-white' : 'text-[#3a2f2f]'
+                currentTier === tier ? 'text-white' : 'text-[#3a2f2f] dark:text-gray-300'
               }`}
             >
               {tier}

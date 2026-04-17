@@ -28,13 +28,13 @@ export default function StableScreen() {
   }
 
   return (
-    <ScrollView className="flex-1 bg-[#fff8f0]" showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 bg-[#fff8f0] dark:bg-gray-900" showsVerticalScrollIndicator={false}>
       <StableHeader />
 
-      <Animated.View entering={FadeIn.duration(600)} className="px-6 -mt-8">
+      <Animated.View entering={FadeIn.duration(600)} className="px-6 -mt-8 max-w-4xl mx-auto">
         <Text className="font-black text-4xl text-[#3a2f2f] mb-7">Your Stable</Text>
         
-        <View className="flex-row flex-wrap gap-4">
+        <View className="flex-row flex-wrap gap-6">
           {stableRikishi.length > 0 ? (
             stableRikishi.map((r, index) => (
               <StableCard
@@ -44,7 +44,11 @@ export default function StableScreen() {
               />
             ))
           ) : (
-            <Text className="text-center text-[#3a2f2f] font-semibold">No stable loaded. Complete a draft or load from cloud to see your rikishi here.</Text>
+            <View className="items-center">
+              <Text className="text-6xl mb-4">🤖</Text>
+              <Text className="text-center text-[#3a2f2f] dark:text-gray-300 font-semibold text-lg">No stable loaded yet.</Text>
+              <Text className="text-center text-[#d97757] dark:text-orange-300 mt-2">Complete a draft or load from cloud to see your rikishi here.</Text>
+            </View>
           )}
         </View>
       </Animated.View>

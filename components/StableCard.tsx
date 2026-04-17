@@ -20,7 +20,7 @@ export function StableCard({ rikishi, size = 'medium', onPress }: StableCardProp
     <TouchableOpacity 
       onPress={handlePress}
       activeOpacity={0.95}
-      className={`bg-white/95 backdrop-blur-3xl border border-white/90 rounded-3xl p-5 shadow-2xl ${isLarge ? 'w-[62%]' : 'w-[35%]'}`}
+      className={`bg-white/95 dark:bg-gray-800/95 backdrop-blur-3xl border border-white/90 dark:border-gray-700 rounded-3xl p-5 shadow-2xl ${isLarge ? 'w-[62%]' : 'w-[35%]'}`}
     >
       <View className="items-center">
         <ChibiAvatar 
@@ -31,10 +31,10 @@ export function StableCard({ rikishi, size = 'medium', onPress }: StableCardProp
         />
       </View>
       
-      <Text className="text-center font-black text-[#3a2f2f] mt-5 text-[17px] tracking-tight">
+      <Text className="text-center font-black text-[#3a2f2f] dark:text-white mt-5 text-[17px] tracking-tight">
         {rikishi.name}
       </Text>
-      <Text className="text-center text-[#d97757] text-[13px] mt-0.5 tracking-wide">
+      <Text className="text-center text-[#d97757] dark:text-orange-300 text-[13px] mt-0.5 tracking-wide">
         {rikishi.rank}
       </Text>
     </TouchableOpacity>

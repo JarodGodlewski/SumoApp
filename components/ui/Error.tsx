@@ -7,9 +7,9 @@ interface ErrorProps {
 
 export function Error({ message = 'Something went wrong.', onRetry }: ErrorProps) {
   return (
-    <View className="flex-1 justify-center items-center bg-[#fff8f0]">
-      <Text className="font-black text-2xl text-red-500 mb-4">Oops!</Text>
-      <Text className="text-center text-[#3a2f2f] mb-6">{message}</Text>
+    <View className="flex-1 justify-center items-center bg-[#fff8f0] dark:bg-gray-900">
+      <Text className="font-black text-2xl text-red-500 dark:text-red-400 mb-4">Oops!</Text>
+      <Text className="text-center text-[#3a2f2f] dark:text-gray-300 mb-6">{message}</Text>
       {onRetry && (
         <TouchableOpacity
           onPress={onRetry}
