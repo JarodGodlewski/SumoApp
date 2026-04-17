@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRikishiList } from '../src/lib/sumoApi';
+import type { Rikishi } from '../types';
 
 type Tier = 'Yokozuna/Ozeki' | 'Sekiwake/Komusubi' | 'Maegashira' | 'Juryo';
 
@@ -11,22 +12,23 @@ export const useDraft = () => {
 
   const tiers: Tier[] = ['Yokozuna/Ozeki', 'Sekiwake/Komusubi', 'Maegashira', 'Juryo'];
 
-  const filteredRikishi = rikishi
-    .filter((r) => {
+  const filteredRikishi: Rikishi[] = rikishi
+    .filter((r: Rikishi) => {
       if (currentTier === 'Yokozuna/Ozeki') return r.rank.includes('Yokozuna') || r.rank.includes('Ozeki');
       if (currentTier === 'Sekiwake/Komusubi') return r.rank.includes('Sekiwake') || r.rank.includes('Komusubi');
       if (currentTier === 'Maegashira') return r.rank.includes('Maegashira');
       return r.rank.includes('Juryo');
     })
-    .sort((a, b) => (a.rank || '').localeCompare(b.rank || ''));
+    .sort((a: Rikishi, b: Rikishi) => (a.rank || '').localeCompare(b.rank || ''));
 
-  const makePick = (rikishiId: string) => {
+  const makePick = useCallback((rikishiId: string) => {
     if (!isMyTurn || selected.includes(rikishiId) || selected.length >= 8) return;
 
     const newSelected = [...selected, rikishiId];
     setSelected(newSelected);
     setIsMyTurn(false);
 
+    // Simulate AI opponent pick
     setTimeout(() => {
       const available = filteredRikishi.filter((r) => !newSelected.includes(r.id));
       if (available.length > 0) {
@@ -34,11 +36,12 @@ export const useDraft = () => {
         setIsMyTurn(true);
       }
     }, 800);
-  };
+  }, [isMyTurn, selected, filteredRikishi]);
 
   const resetDraft = () => {
     setSelected([]);
     setIsMyTurn(true);
+    setCurrentTier('Yokozuna/Ozeki');
   };
 
   return {
