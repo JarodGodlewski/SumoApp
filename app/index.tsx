@@ -9,6 +9,8 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 
 export default function StableScreen() {
   const { data: rikishi = [] } = useRikishiList();
+  
+  // Use real data from the API (no more fake demo data)
   const stableRikishi = rikishi.slice(0, 8);
 
   return (
@@ -30,12 +32,23 @@ export default function StableScreen() {
       </Animated.View>
 
       <View className="px-6 mt-14 flex-row gap-4">
-        <Button title="CHIBI RUMBLE" subtitle="MINI GAME" variant="primary" onPress={() => {}} />
-        <Button title="LIVE NHK" subtitle="WATCH NOW" variant="secondary" onPress={() => {}} />
+        <Button 
+          title="CHIBI RUMBLE" 
+          subtitle="MINI GAME" 
+          variant="primary" 
+          onPress={() => {}} 
+        />
+        <Button 
+          title="LIVE NHK" 
+          subtitle="WATCH NOW" 
+          variant="secondary" 
+          onPress={() => {}} 
+        />
       </View>
 
       <View className="px-6 mt-14 mb-20">
         <Text className="font-black text-4xl text-[#3a2f2f] mb-7">Today's Torikumi</Text>
+        
         <View className="space-y-4">
           <TorikumiCard left="Hoshoryu" right="Ura" />
           <TorikumiCard left="Terunofuji" right="Mitakeumi" />

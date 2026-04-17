@@ -5,7 +5,7 @@ export function StableHeader() {
   return (
     <Animated.View 
       entering={FadeIn.duration(700)}
-      className="pt-16 pb-14 px-6 bg-gradient-to-b from-[#fff1e6] via-[#fff1e6] to-[#fff8f0] relative"
+      className="pt-16 pb-14 px-6 bg-gradient-to-b from-[#fff1e6] via-[#fff1e6] to-[#fff8f0]"
     >
       <View className="flex-row justify-between items-start">
         <View>

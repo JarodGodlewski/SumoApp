@@ -6,22 +6,34 @@ interface ButtonProps {
   subtitle?: string;
   variant?: 'primary' | 'secondary';
   onPress: () => void;
+  disabled?: boolean;
 }
 
-export function Button({ title, subtitle, variant = 'primary', onPress }: ButtonProps) {
+export function Button({ 
+  title, 
+  subtitle, 
+  variant = 'primary', 
+  onPress, 
+  disabled = false 
+}: ButtonProps) {
   const isPrimary = variant === 'primary';
 
   const handlePress = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    onPress();
+    if (!disabled) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      onPress();
+    }
   };
 
   return (
     <TouchableOpacity
       onPress={handlePress}
+      disabled={disabled}
       className={`flex-1 py-8 rounded-3xl items-center shadow-2xl active:opacity-90 ${
-        isPrimary ? 'bg-[#ff6b6b]' : 'bg-white border-2 border-[#ff6b6b]'
-      }`}
+        isPrimary 
+          ? 'bg-[#ff6b6b]' 
+          : 'bg-white border-2 border-[#ff6b6b]'
+      } ${disabled ? 'opacity-50' : ''}`}
     >
       <Text className={`font-black text-[22px] ${isPrimary ? 'text-white' : 'text-[#ff6b6b]'}`}>
         {title}
