@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 
-import { Tier } from '../../types/draft';
+import type { Tier } from '../../types';
 
 interface TierTabsProps {
   tiers: Tier[];

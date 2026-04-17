@@ -3,8 +3,11 @@ import { DraftHeader } from '../components/DraftHeader';
 import { TierTabs } from '../components/TierTabs';
 import { DraftCard } from '../components/DraftCard';
 import { ParticleBurst } from '../components/ParticleBurst';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useDraft } from '../hooks/useDraft';
+import { useStable } from '../hooks/useStable';
+import { Loading } from '../components/ui/Loading';
+import { Error } from '../components/ui/Error';
 
 export default function DraftScreen() {
   const {
@@ -15,7 +18,20 @@ export default function DraftScreen() {
     filteredRikishi,
     makePick,
     setCurrentTier,
+    isLoading,
+    error,
+    refetch,
   } = useDraft();
+  const { saveStable } = useStable();
+  const router = useRouter();
+
+  if (isLoading) {
+    return <Loading message="Loading Rikishi..." />;
+  }
+
+  if (error) {
+    return <Error message="Unable to load rikishi data. Please try again later." onRetry={refetch} />;
+  }
 
   return (
     <ScrollView className="flex-1 bg-[#fff8f0]">
@@ -51,18 +67,17 @@ export default function DraftScreen() {
           </Text>
         </View>
 
-        <Link href="/" asChild>
-          <TouchableOpacity 
-            disabled={selected.length !== 8}
-            className={`py-6 rounded-3xl font-black text-2xl tracking-widest shadow-2xl ${
-              selected.length === 8 
-                ? 'bg-[#ff6b6b] text-white active:scale-[0.97]' 
-                : 'bg-gray-200 text-gray-400'
-            }`}
-          >
-            COMPLETE DRAFT
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity
+          disabled={selected.length !== 8}
+          onPress={() => { if (selected.length === 8) { saveStable(selected); router.push('/'); } }}
+          className={`py-6 rounded-3xl font-black text-2xl tracking-widest shadow-2xl ${
+            selected.length === 8
+              ? 'bg-[#ff6b6b] text-white active:scale-[0.97]'
+              : 'bg-gray-200 text-gray-400'
+          }`}
+        >
+          <Text className="text-center">COMPLETE DRAFT</Text>
+        </TouchableOpacity>
       </View>
 
       <ParticleBurst trigger={selected.length > 0} />

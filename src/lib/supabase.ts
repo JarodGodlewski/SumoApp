@@ -15,3 +15,23 @@ export const joinDraftLeague = (leagueId: string, onPickUpdate: (picks: any[]) =
     .subscribe();
   return () => supabase.removeChannel(channel);
 };
+
+// Stable persistence
+export const saveStable = async (rikishiIds: string[]) => {
+  const { data, error } = await supabase
+    .from('stables')
+    .insert([{ rikishi_ids: rikishiIds }]);
+  if (error) throw error;
+  return data;
+};
+
+export const loadStable = async (): Promise<string[]> => {
+  const { data, error } = await supabase
+    .from('stables')
+    .select('rikishi_ids')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .single();
+  if (error) throw error;
+  return data?.rikishi_ids || [];
+};

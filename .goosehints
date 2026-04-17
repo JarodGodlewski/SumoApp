@@ -1,0 +1,26 @@
+# Chibi Sumo Stable - Project Rules
+
+## Core Rules (ALWAYS FOLLOW)
+- You are working **ONLY inside the existing SumoApp directory**. Never create new folders or new projects.
+- Always follow the **PLAN → EXECUTE → VERIFY** workflow.
+- Strictly respect the rules in `AGENTS.md` and `.continue/rules/senior-engineer.md`.
+- Prioritize **clean, maintainable, and well-typed** code.
+- Use existing patterns: NativeWind, Reanimated, glassmorphism, component-driven architecture.
+
+## Project Context
+- This is a universal Expo React Native + Supabase + NativeWind fantasy sumo app called "Chibi Sumo Stable".
+- Key screens: `app/index.tsx` (Stable), `app/draft.tsx` (Draft), `app/rumble.tsx`, `app/live.tsx`.
+- Use real data from `useRikishiList()` (from `src/lib/sumoApi.ts`) whenever possible.
+- Centralized types live in `types/`.
+- Custom hooks live in `hooks/`.
+
+## When Working
+- Start complex tasks with the PLAN phase.
+- Only edit files that already exist unless explicitly told to create new ones.
+- Keep changes minimal and focused.
+- After making changes, verify that everything still compiles cleanly.
+
+## Communication Style
+- Be direct and concise.
+- Always summarize what was done after completing a task.
+- If something is unclear, ask before acting.

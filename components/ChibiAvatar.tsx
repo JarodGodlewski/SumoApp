@@ -79,7 +79,7 @@ export function ChibiAvatar({ name, size = 80, rank, status = 'neutral', animate
       )}
 
       {status === 'win' && showBurst && (
-        <ParticleBurst trigger={showBurst} count={18} color="#ff6b6b" onComplete={() => setShowBurst(false)} />
+        <ParticleBurst trigger={showBurst} color="#ff6b6b" onComplete={() => setShowBurst(false)} />
       )}
     </View>
   );

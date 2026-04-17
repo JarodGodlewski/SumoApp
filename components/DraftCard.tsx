@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { ChibiAvatar } from './ChibiAvatar';
 
-import { Rikishi } from '../../types/rikishi';
+import type { Rikishi } from '../../types';
 
 interface DraftCardProps {
   rikishi: Rikishi;

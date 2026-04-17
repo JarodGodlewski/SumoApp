@@ -12,8 +12,11 @@ export const useDraft = (): {
   makePick: (rikishiId: string) => void;
   setCurrentTier: (tier: Tier) => void;
   resetDraft: () => void;
+  isLoading: boolean;
+  error: any;
+  refetch: () => void;
 } => {
-  const { data: rikishi = [] } = useRikishiList();
+  const { data: rikishi = [], isLoading, error, refetch } = useRikishiList();
   const [selected, setSelected] = useState<string[]>([]);
   const [currentTier, setCurrentTier] = useState<Tier>('Yokozuna/Ozeki');
   const [isMyTurn, setIsMyTurn] = useState(true);
@@ -60,5 +63,8 @@ export const useDraft = (): {
     makePick,
     setCurrentTier,
     resetDraft,
+    isLoading,
+    error,
+    refetch,
   };
 };
