@@ -1,0 +1,37 @@
+{
+  "name": "chibisumoclean",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.0",
+    "@tanstack/react-query": "^5.99.0",
+    "expo": "~54.0.33",
+    "expo-haptics": "~15.0.8",
+    "expo-linear-gradient": "~15.0.8",
+    "expo-router": "~6.0.23",
+    "expo-status-bar": "~3.0.9",
+    "lottie-ios": "^4.6.0",
+    "lottie-react-native": "~7.3.1",
+    "nativewind": "^4.2.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-reanimated": "~4.1.1",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-web": "^0.21.0",
+    "tailwindcss": "^3.4.19",
+    "zod": "^4.3.6"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  }
+}
