@@ -26,7 +26,7 @@ export default function RootLayout() {
         }}
       >
         <Tabs.Screen
-          name="stable"                    // ← Changed from "index"
+          name="stable"
           options={{
             title: 'Stable',
             tabBarIcon: () => <Text>🏠</Text>,
