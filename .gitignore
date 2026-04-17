@@ -39,3 +39,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Continue.dev - keep API keys local
+.continue/config.json
+
+.vscode/

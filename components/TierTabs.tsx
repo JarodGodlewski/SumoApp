@@ -1,9 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import { Tier } from '../../types/draft';
+
 interface TierTabsProps {
-  tiers: string[];
-  currentTier: string;
-  onChange: (tier: string) => void;
+  tiers: Tier[];
+  currentTier: Tier;
+  onChange: (tier: Tier) => void;
 }
 
 export function TierTabs({ tiers, currentTier, onChange }: TierTabsProps) {

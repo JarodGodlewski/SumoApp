@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { ChibiAvatar } from './ChibiAvatar';
 
+import { Rikishi } from '../../types/rikishi';
+
 interface DraftCardProps {
-  rikishi: any;
+  rikishi: Rikishi;
   isPicked: boolean;
   onPress: () => void;
 }

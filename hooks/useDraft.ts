@@ -1,10 +1,18 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useRikishiList } from '../src/lib/sumoApi';
 import type { Rikishi } from '../types';
+import type { Tier } from '../types/draft';
 
-type Tier = 'Yokozuna/Ozeki' | 'Sekiwake/Komusubi' | 'Maegashira' | 'Juryo';
-
-export const useDraft = () => {
+export const useDraft = (): {
+  selected: string[];
+  currentTier: Tier;
+  isMyTurn: boolean;
+  tiers: Tier[];
+  filteredRikishi: Rikishi[];
+  makePick: (rikishiId: string) => void;
+  setCurrentTier: (tier: Tier) => void;
+  resetDraft: () => void;
+} => {
   const { data: rikishi = [] } = useRikishiList();
   const [selected, setSelected] = useState<string[]>([]);
   const [currentTier, setCurrentTier] = useState<Tier>('Yokozuna/Ozeki');
@@ -28,7 +36,6 @@ export const useDraft = () => {
     setSelected(newSelected);
     setIsMyTurn(false);
 
-    // Simulate AI opponent pick
     setTimeout(() => {
       const available = filteredRikishi.filter((r) => !newSelected.includes(r.id));
       if (available.length > 0) {
