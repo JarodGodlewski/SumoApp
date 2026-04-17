@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OfflineIndicator } from '../components/OfflineIndicator';
 
@@ -26,7 +26,7 @@ export default function RootLayout() {
         }}
       >
         <Tabs.Screen
-          name="index"
+          name="stable"                    // ← Changed from "index"
           options={{
             title: 'Stable',
             tabBarIcon: () => <Text>🏠</Text>,
