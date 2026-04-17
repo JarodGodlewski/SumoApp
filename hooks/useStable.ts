@@ -1,34 +1,44 @@
 import { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { saveStable, loadStable } from '../src/lib/supabase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const useStable = () => {
   const [stable, setStable] = useState<string[]>([]);
-
-  const { data: loadedStable, isLoading: loadLoading, error: loadError, refetch } = useQuery({
-    queryKey: ['stable'],
-    queryFn: loadStable,
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<any>(null);
 
   useEffect(() => {
-    if (loadedStable) setStable(loadedStable);
-  }, [loadedStable]);
+    const loadStable = async () => {
+      try {
+        const stored = await AsyncStorage.getItem('userStable');
+        if (stored) {
+          setStable(JSON.parse(stored));
+        }
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadStable();
+  }, []);
 
-  const saveMutation = useMutation({
-    mutationFn: saveStable,
-    onSuccess: () => refetch(),
-  });
-
-  const saveCurrentStable = (rikishiIds: string[]) => {
-    setStable(rikishiIds);
-    saveMutation.mutate(rikishiIds);
+  const saveStableAsync = async (rikishiIds: string[]) => {
+    try {
+      setIsLoading(true);
+      await AsyncStorage.setItem('userStable', JSON.stringify(rikishiIds));
+      setStable(rikishiIds);
+      setError(null);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
     stable,
-    isLoading: loadLoading || saveMutation.isPending,
-    error: loadError || saveMutation.error,
-    saveStable: saveCurrentStable,
-    loadStable: refetch,
+    isLoading,
+    error,
+    saveStable: saveStableAsync,
   };
 };
