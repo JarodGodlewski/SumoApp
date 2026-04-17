@@ -27,7 +27,6 @@ export const useDraft = () => {
     setSelected(newSelected);
     setIsMyTurn(false);
 
-    // Simulate AI opponent pick
     setTimeout(() => {
       const available = filteredRikishi.filter((r) => !newSelected.includes(r.id));
       if (available.length > 0) {

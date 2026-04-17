@@ -43,7 +43,6 @@ export default function DraftScreen() {
         </View>
       </View>
 
-      {/* Bottom Bar */}
       <View className="fixed bottom-0 left-0 right-0 p-6 bg-white border-t-4 border-[#ff6b6b] shadow-2xl">
         <View className="flex-row justify-between mb-4">
           <Text className="font-black text-3xl text-[#3a2f2f]">STABLE {selected.length}/8</Text>
