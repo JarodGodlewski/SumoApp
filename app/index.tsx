@@ -3,33 +3,23 @@ import { useEffect } from 'react';
 import { useRikishiList } from '../src/lib/sumoApi';
 import { ChibiAvatar } from '../components/ChibiAvatar';
 import { ParticleBurst } from '../components/ParticleBurst';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
 
 export default function StableScreen() {
-  const { data: rikishi = [], isLoading } = useRikishiList();
-
-  // Use real top rikishi (no more fake demo data)
+  const { data: rikishi = [] } = useRikishiList();
   const stableRikishi = rikishi.slice(0, 8);
-
-  useEffect(() => {
-    // Confetti on load
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View className="flex-1 bg-[#fff8f0] items-center justify-center">
-        <Text className="text-2xl font-black text-[#3a2f2f]">Loading Stable...</Text>
-      </View>
-    );
-  }
 
   return (
     <ScrollView className="flex-1 bg-[#fff8f0]" showsVerticalScrollIndicator={false}>
       {/* Premium Header */}
-      <View className="pt-14 pb-12 px-6 bg-gradient-to-b from-[#fff1e6] to-[#fff8f0]">
+      <Animated.View 
+        entering={FadeIn.duration(600)}
+        className="pt-14 pb-12 px-6 bg-gradient-to-b from-[#fff1e6] to-[#fff8f0]"
+      >
         <Text className="text-6xl font-black text-[#3a2f2f] tracking-[-4px]">CHIBI SUMO</Text>
-        <Text className="text-[#d97757] text-3xl mt-1">かわいい力士の幻想</Text>
+        <Text className="text-[#d97757] text-3xl -mt-1">かわいい力士の幻想</Text>
 
         <View className="mt-10 flex-row justify-between items-end">
           <View>
@@ -42,57 +32,58 @@ export default function StableScreen() {
             <Text className="text-7xl font-black text-[#ff6b6b] tracking-[-5px]">248</Text>
           </View>
         </View>
-      </View>
+      </Animated.View>
 
-      {/* Your Stable - Dynamic Bento Grid */}
+      {/* Your Stable */}
       <View className="px-6 -mt-6">
-        <Text className="font-black text-3xl text-[#3a2f2f] mb-5">Your Stable</Text>
+        <Text className="font-black text-3xl text-[#3a2f2f] mb-6">Your Stable</Text>
         
         <View className="flex-row flex-wrap gap-4">
           {stableRikishi.map((r: any, index) => (
-            <TouchableOpacity 
+            <Animated.View 
               key={r.id} 
-              className={`bg-white/90 backdrop-blur-2xl border border-white/70 rounded-3xl p-4 shadow-2xl active:scale-[0.985] ${index % 3 === 0 ? 'w-[62%]' : 'w-[35%]'}`}
+              entering={FadeInDown.delay(index * 80).duration(500)}
+              className={`bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl p-4 shadow-2xl ${index % 3 === 0 ? 'w-[62%]' : 'w-[35%]'}`}
             >
               <ChibiAvatar 
                 name={r.name} 
                 rank={r.rank} 
-                size={index % 3 === 0 ? 130 : 95} 
+                size={index % 3 === 0 ? 135 : 100} 
                 status="win" 
               />
-              <Text className="text-center font-black text-[#3a2f2f] mt-4 text-xl">{r.name}</Text>
-              <Text className="text-center text-[#d97757] text-base mt-0.5">{r.rank}</Text>
-            </TouchableOpacity>
+              <Text className="text-center font-black text-[#3a2f2f] mt-4 text-[17px]">{r.name}</Text>
+              <Text className="text-center text-[#d97757] text-[13px] mt-0.5 tracking-wide">{r.rank}</Text>
+            </Animated.View>
           ))}
         </View>
       </View>
 
       {/* Quick Actions */}
       <View className="px-6 mt-12 flex-row gap-4">
-        <TouchableOpacity className="flex-1 bg-[#ff6b6b] py-7 rounded-3xl items-center active:opacity-90">
-          <Text className="text-white font-black text-2xl">🔥 CHIBI RUMBLE</Text>
+        <TouchableOpacity className="flex-1 bg-[#ff6b6b] py-8 rounded-3xl items-center active:opacity-90 shadow-xl">
+          <Text className="text-white font-black text-[22px]">🔥 CHIBI RUMBLE</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity className="flex-1 bg-white border-2 border-[#ff6b6b] py-7 rounded-3xl items-center active:opacity-90">
-          <Text className="text-[#ff6b6b] font-black text-2xl">📺 LIVE NHK</Text>
+        <TouchableOpacity className="flex-1 bg-white border-2 border-[#ff6b6b] py-8 rounded-3xl items-center active:opacity-90 shadow-xl">
+          <Text className="text-[#ff6b6b] font-black text-[22px]">📺 LIVE NHK</Text>
         </TouchableOpacity>
       </View>
 
       {/* Today's Torikumi */}
-      <View className="px-6 mt-12 mb-16">
-        <Text className="font-black text-3xl text-[#3a2f2f] mb-5">Today's Torikumi</Text>
+      <View className="px-6 mt-12 mb-20">
+        <Text className="font-black text-3xl text-[#3a2f2f] mb-6">Today's Torikumi</Text>
         
         <View className="space-y-4">
-          <View className="bg-white/90 backdrop-blur-2xl border border-white/70 rounded-3xl p-6 flex-row justify-between items-center">
-            <Text className="font-bold text-xl">Hoshoryu</Text>
+          <View className="bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl p-6 flex-row justify-between items-center">
+            <Text className="font-bold text-[17px]">Hoshoryu</Text>
             <Text className="text-[#d97757] text-sm font-medium">VS</Text>
-            <Text className="font-bold text-xl text-right">Ura</Text>
+            <Text className="font-bold text-[17px] text-right">Ura</Text>
           </View>
           
-          <View className="bg-white/90 backdrop-blur-2xl border border-white/70 rounded-3xl p-6 flex-row justify-between items-center">
-            <Text className="font-bold text-xl">Terunofuji</Text>
+          <View className="bg-white/95 backdrop-blur-2xl border border-white/80 rounded-3xl p-6 flex-row justify-between items-center">
+            <Text className="font-bold text-[17px]">Terunofuji</Text>
             <Text className="text-[#d97757] text-sm font-medium">VS</Text>
-            <Text className="font-bold text-xl text-right">Mitakeumi</Text>
+            <Text className="font-bold text-[17px] text-right">Mitakeumi</Text>
           </View>
         </View>
       </View>
